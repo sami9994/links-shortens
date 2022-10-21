@@ -10,10 +10,7 @@ const Form = () => {
   }
   const sendData = async (mainUrl) => {
     try {
-      let res = await axios.post(
-        'https://github.com/sami9994/links-shortens.git',
-        { mainUrl }
-      )
+      let res = await axios.post('http://localhost:5000/', { mainUrl })
       let data1 = res.data.dataArr
       setLinks(data1)
     } catch (error) {
@@ -63,9 +60,7 @@ const Form = () => {
               <section className='short-url'>
                 <h1 className='result-header'>Short Url</h1>
 
-                <a
-                  href={`https://github.com/sami9994/links-shortens.git/${link.shortUrl}`}
-                >
+                <a href={`http://localhost:5000/${link.shortUrl}`}>
                   {link.shortUrl}
                 </a>
               </section>
