@@ -2,7 +2,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
 const Link = require('./Modules/Links.js')
-
+const path = require('path')
 const app = express()
 const connectDB = require('./db/connectDB.js')
 require('dotenv').config()
@@ -10,7 +10,7 @@ app.use(cors())
 
 app.use(express.json())
 
-app.post('intense-retreat-08312.herokuapp.com/', async (req, res) => {
+app.post('/', async (req, res) => {
   const { mainUrl } = req.body
   const linkIsHere = await Link.findOne({ mainUrl })
   if (linkIsHere) {
@@ -20,7 +20,7 @@ app.post('intense-retreat-08312.herokuapp.com/', async (req, res) => {
 
   res.json({ dataArr: [newLink] })
 })
-app.get('intense-retreat-08312.herokuapp.com/:shortUrl', async (req, res) => {
+app.get('/:shortUrl', async (req, res) => {
   const { shortUrl } = req.params
 
   const linkItem = await Link.findOne({ shortUrl })
@@ -31,6 +31,7 @@ app.get('intense-retreat-08312.herokuapp.com/:shortUrl', async (req, res) => {
   return res.redirect(linkItem.mainUrl)
 })
 
+const PORT = process.env.PORT || 4000
 const start = async () => {
   try {
     connectDB()
@@ -39,6 +40,10 @@ const start = async () => {
     console.log(err)
   }
 }
-
-const PORT = process.env.PORT || 4000
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('./front-end/build'))
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'front-end', 'build', 'index.html'))
+  })
+}
 start()
