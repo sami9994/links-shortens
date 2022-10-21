@@ -1,0 +1,16 @@
+.App {
+  background-color: beige;
+  height: 100vh;
+}
+.header-text {
+  text-align: center;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 2rem;
+  padding-top: 2em;
+  color: burlywood;
+}
+@media screen and (max-width: 600px) {
+  .header-text {
+    font-size: 1em;
+  }
+}
