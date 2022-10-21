@@ -10,7 +10,7 @@ app.use(cors())
 
 app.use(express.json())
 
-app.post('/', async (req, res) => {
+app.post('intense-retreat-08312.herokuapp.com/', async (req, res) => {
   const { mainUrl } = req.body
   const linkIsHere = await Link.findOne({ mainUrl })
   if (linkIsHere) {
@@ -20,7 +20,7 @@ app.post('/', async (req, res) => {
 
   res.json({ dataArr: [newLink] })
 })
-app.get('/:shortUrl', async (req, res) => {
+app.get('intense-retreat-08312.herokuapp.com/:shortUrl', async (req, res) => {
   const { shortUrl } = req.params
 
   const linkItem = await Link.findOne({ shortUrl })
