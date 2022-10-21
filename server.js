@@ -10,7 +10,7 @@ app.use(cors())
 
 app.use(express.json())
 app.get('/', (req, res) => {
-  res.send('ist working')
+  res.send('its working')
 })
 app.post('/', async (req, res) => {
   const { mainUrl } = req.body
@@ -36,7 +36,7 @@ app.get('/:shortUrl', async (req, res) => {
 const start = async () => {
   try {
     connectDB()
-    app.listen(PORT, console.log(`we are on ${PORT}`))
+    app.listen(process.env.PORT || 5000, console.log(`we are on ${PORT}`))
   } catch (err) {
     console.log(err)
   }
