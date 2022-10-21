@@ -9,6 +9,9 @@ require('dotenv').config()
 app.use(cors())
 
 app.use(express.json())
+app.get('/', (req, res) => {
+  res.send('ist working')
+})
 app.post('/', async (req, res) => {
   const { mainUrl } = req.body
   const linkIsHere = await Link.findOne({ mainUrl })
